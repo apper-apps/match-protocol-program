@@ -1,28 +1,24 @@
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
-import PropertyCard from '@/components/molecules/PropertyCard'
-import Button from '@/components/atoms/Button'
-import Card from '@/components/atoms/Card'
-import Badge from '@/components/atoms/Badge'
-import Input from '@/components/atoms/Input'
-import Select from '@/components/atoms/Select'
-import Loading from '@/components/ui/Loading'
-import Error from '@/components/ui/Error'
-import Empty from '@/components/ui/Empty'
-import ApperIcon from '@/components/ApperIcon'
-import { getShowcaseProjects } from '@/services/api/propertyService'
-
-const ShowcaseProjectsPage = () => {
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import ApperIcon from "@/components/ApperIcon";
+import Badge from "@/components/atoms/Badge";
+import Select from "@/components/atoms/Select";
+import Button from "@/components/atoms/Button";
+import Card from "@/components/atoms/Card";
+import Input from "@/components/atoms/Input";
+import Empty from "@/components/ui/Empty";
+import Error from "@/components/ui/Error";
+import Loading from "@/components/ui/Loading";
+import PropertyCard from "@/components/molecules/PropertyCard";
+import { getShowcaseProjects } from "@/services/api/propertyService";
+function ShowcaseProjectsPage() {
+  const navigate = useNavigate()
   const [projects, setProjects] = useState([])
-  const [filteredProjects, setFilteredProjects] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [selectedProject, setSelectedProject] = useState(null)
-  const [showModal, setShowModal] = useState(false)
-  const navigate = useNavigate()
-  
-  // Filters
+  const [imageErrors, setImageErrors] = useState({})
+  const [imageLoading, setImageLoading] = useState({})
   const [filters, setFilters] = useState({
     search: '',
     region: '',
@@ -30,107 +26,127 @@ const ShowcaseProjectsPage = () => {
     priceRange: ''
   })
   
-  useEffect(() => {
+useEffect(() => {
     loadProjects()
   }, [])
-  
-  useEffect(() => {
-    applyFilters()
-  }, [projects, filters])
-  
-  const loadProjects = async () => {
+
+  async function loadProjects() {
     try {
       setLoading(true)
       setError(null)
+      const data = await getShowcaseProjects()
+      setProjects(data)
       
-      const projectsData = await getShowcaseProjects()
-      setProjects(projectsData)
+      // Initialize image loading states
+      const initialLoading = {}
+      data.forEach(project => {
+        if (project.images) {
+          project.images.forEach((_, imageIndex) => {
+            initialLoading[`${project.Id}-${imageIndex}`] = true
+          })
+        }
+      })
+      setImageLoading(initialLoading)
     } catch (err) {
       setError(err.message)
     } finally {
       setLoading(false)
     }
   }
-  
-  const applyFilters = () => {
-    let filtered = [...projects]
+
+  function handleImageError(projectId, imageIndex) {
+    const key = `${projectId}-${imageIndex}`
+    setImageErrors(prev => ({ ...prev, [key]: true }))
+    setImageLoading(prev => ({ ...prev, [key]: false }))
+  }
+
+  function handleImageLoad(projectId, imageIndex) {
+    const key = `${projectId}-${imageIndex}`
+    setImageLoading(prev => ({ ...prev, [key]: false }))
+  }
+
+  function getImageSrc(project, imageIndex = 0) {
+    const key = `${project.Id}-${imageIndex}`
     
-    // Search filter
-    if (filters.search) {
+    if (imageErrors[key]) {
+      return `https://via.placeholder.com/800x600/40916C/FFFFFF?text=${encodeURIComponent(project.title || 'Project Image')}`
+    }
+    
+    const image = project.images?.[imageIndex]
+    if (!image) {
+      return `https://via.placeholder.com/800x600/40916C/FFFFFF?text=${encodeURIComponent(project.title || 'Project Image')}`
+    }
+    
+    return image
+  }
+
+  function applyFilters() {
+return projects.filter(project => {
       const searchLower = filters.search.toLowerCase()
-      filtered = filtered.filter(project =>
+      const matchesSearch = !filters.search || 
         project.title.toLowerCase().includes(searchLower) ||
-        project.description?.toLowerCase().includes(searchLower) ||
-        project.location?.toLowerCase().includes(searchLower)
-      )
-    }
-    
-    // Region filter
-    if (filters.region) {
-      filtered = filtered.filter(project =>
-        project.region && project.region.toLowerCase() === filters.region.toLowerCase()
-      )
-    }
-    
-    // Build type filter
-    if (filters.buildType) {
-      filtered = filtered.filter(project =>
-        project.buildType && project.buildType.toLowerCase() === filters.buildType.toLowerCase()
-      )
-    }
-    
-    // Price range filter
-    if (filters.priceRange) {
-      const [min, max] = filters.priceRange.split('-').map(p => parseInt(p.replace(/[^\d]/g, '')))
-      filtered = filtered.filter(project => {
-        const cost = project.estimatedCost || 0
-        return cost >= min * 1000 && (!max || cost <= max * 1000)
-      })
-    }
-    
-    setFilteredProjects(filtered)
+        project.location.toLowerCase().includes(searchLower) ||
+        project.story.toLowerCase().includes(searchLower)
+      
+      const matchesRegion = !filters.region || project.region.toLowerCase() === filters.region.toLowerCase()
+      const matchesBuildType = !filters.buildType || project.buildType === filters.buildType
+      
+      let matchesPriceRange = true
+      if (filters.priceRange) {
+        const [min, max] = filters.priceRange.split('-').map(Number)
+        const cost = project.estimatedCost / 1000 // Convert to thousands
+        matchesPriceRange = cost >= min && cost <= max
+      }
+      
+      return matchesSearch && matchesRegion && matchesBuildType && matchesPriceRange
+    })
   }
-  
-  const handleFilterChange = (key, value) => {
-    setFilters(prev => ({ ...prev, [key]: value }))
+
+  function handleFilterChange(key, value) {
+    setFilters(prev => ({
+      ...prev,
+      [key]: value
+    }))
   }
-  
-  const handleProjectClick = (project) => {
-    setSelectedProject(project)
-    setShowModal(true)
+
+  function handleProjectClick(project) {
+    navigate(`/project/${project.Id}`)
   }
-  
-  const handleContactBuilder = (project) => {
-    navigate('/custom-build', { state: { selectedBuilder: project.builderId } })
+
+  function handleContactBuilder(project) {
+    navigate(`/builder/${project.builderId}`)
   }
+
+  const projectsData = applyFilters()
   
   const regions = [
     { value: '', label: 'All Regions' },
     { value: 'auckland', label: 'Auckland' },
     { value: 'waikato', label: 'Waikato' },
-    { value: 'bay-of-plenty', label: 'Bay of Plenty' },
+    { value: 'bay of plenty', label: 'Bay of Plenty' },
     { value: 'wellington', label: 'Wellington' },
     { value: 'canterbury', label: 'Canterbury' },
     { value: 'otago', label: 'Otago' }
   ]
-  
+
   const buildTypes = [
     { value: '', label: 'All Types' },
     { value: 'residential', label: 'Residential' },
     { value: 'commercial', label: 'Commercial' },
-    { value: 'renovation', label: 'Renovation' },
-    { value: 'extension', label: 'Extension' }
+    { value: 'industrial', label: 'Industrial' },
+    { value: 'mixed-use', label: 'Mixed Use' }
   ]
-  
+
   const priceRanges = [
     { value: '', label: 'All Prices' },
     { value: '200-400', label: '$200k - $400k' },
     { value: '400-600', label: '$400k - $600k' },
     { value: '600-800', label: '$600k - $800k' },
     { value: '800-1000', label: '$800k - $1M' },
-    { value: '1000-', label: '$1M+' }
-  ]
-  
+    { value: '1000-1500', label: '$1M - $1.5M' },
+    { value: '1500-2000', label: '$1.5M+' }
+]
+
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -150,7 +166,8 @@ const ShowcaseProjectsPage = () => {
       </div>
     )
   }
-  
+
+  const filtered = [...projectsData]
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Header */}
@@ -194,64 +211,45 @@ const ShowcaseProjectsPage = () => {
             placeholder="Select price range"
           />
         </div>
-      </Card>
+</Card>
       
       {/* Projects Grid */}
-      {filteredProjects.length === 0 ? (
+      {filtered.length === 0 ? (
         <Empty
           title="No projects found"
-          message="Try adjusting your filters to see more results"
-          icon="Award"
-          actionText="Clear Filters"
-          onAction={() => setFilters({ search: '', region: '', buildType: '', priceRange: '' })}
+          description="Try adjusting your filters to find more projects"
+          icon="Search"
         />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filtered.map((project) => (
             <motion.div
               key={project.Id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.3 }}
               className="group cursor-pointer"
               onClick={() => handleProjectClick(project)}
             >
-              <Card hover className="overflow-hidden h-full">
-                <div className="relative h-64 overflow-hidden">
-                  <img
-                    src={project.images?.[0] || '/api/placeholder/400/300'}
+              <Card className="h-full hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+                <div className="aspect-[4/3] overflow-hidden rounded-lg relative">
+                  {imageLoading[`${project.Id}-0`] && (
+                    <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
+                      <ApperIcon name="Image" size={48} className="text-gray-400" />
+<ApperIcon name="Image" size={48} className="text-gray-400" />
+                    </div>
+                  )}
+                  <img 
+                    src={getImageSrc(project, 0)}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ${
+                      imageLoading[`${project.Id}-0`] ? 'opacity-0' : 'opacity-100'
+                    }`}
+                    onError={() => handleImageError(project.Id, 0)}
+                    onLoad={() => handleImageLoad(project.Id, 0)}
+                    loading="lazy"
                   />
-                  
-                  <div className="absolute top-4 left-4 flex gap-2">
-                    <Badge variant="accent" icon="Award" size="sm">
-                      Showcase
-                    </Badge>
-                    {project.region && (
-                      <Badge variant="default" size="sm">
-                        {project.region}
-                      </Badge>
-                    )}
-                  </div>
-                  
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
-                  <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      icon="Eye"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        handleProjectClick(project)
-                      }}
-                    >
-                      View Details
-                    </Button>
-                  </div>
                 </div>
-                
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">
                     {project.title}
@@ -301,13 +299,13 @@ const ShowcaseProjectsPage = () => {
                     />
                   </div>
                 </div>
-              </Card>
+</Card>
             </motion.div>
           ))}
         </div>
       )}
-      
-      {/* Project Detail Modal */}
+</div>
+  )
       {showModal && selectedProject && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <motion.div

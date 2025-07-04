@@ -5,11 +5,11 @@
     "builderId": 1,
     "region": "Auckland",
     "location": "Remuera, Auckland",
-    "images": [
-      "/api/placeholder/800/600",
-      "/api/placeholder/800/600",
-      "/api/placeholder/800/600",
-      "/api/placeholder/800/600"
+"images": [
+      "https://via.placeholder.com/800x600/40916C/FFFFFF?text=Auckland+Executive+Build",
+      "https://via.placeholder.com/800x600/52B788/FFFFFF?text=Interior+View",
+      "https://via.placeholder.com/800x600/1B4332/FFFFFF?text=Kitchen+Detail",
+      "https://via.placeholder.com/800x600/D4A574/FFFFFF?text=Exterior+View"
     ],
     "videos": [],
     "story": "This stunning executive home showcases the perfect blend of contemporary design and family functionality. Built on a premium Remuera site, the home features high-end finishes throughout including natural stone, hardwood floors, and premium fixtures. The open-plan living areas flow seamlessly to outdoor entertaining spaces, while the private wing houses four generous bedrooms including a luxurious master suite.",
@@ -34,10 +34,10 @@
     "builderId": 2,
     "region": "Waikato",
     "location": "Hamilton, Waikato",
-    "images": [
-      "/api/placeholder/800/600",
-      "/api/placeholder/800/600",
-      "/api/placeholder/800/600"
+"images": [
+      "https://via.placeholder.com/800x600/40916C/FFFFFF?text=Waikato+Family+Haven",
+      "https://via.placeholder.com/800x600/52B788/FFFFFF?text=Living+Area",
+      "https://via.placeholder.com/800x600/1B4332/FFFFFF?text=Family+Kitchen"
     ],
     "videos": [],
     "story": "A beautiful family home designed for comfortable living and entertaining. This project showcases how thoughtful design can create spacious, light-filled living areas within a practical family layout. The home features sustainable materials and energy-efficient systems throughout.",
@@ -62,11 +62,11 @@
     "builderId": 3,
     "region": "Bay of Plenty",
     "location": "Tauranga, Bay of Plenty",
-    "images": [
-      "/api/placeholder/800/600",
-      "/api/placeholder/800/600",
-      "/api/placeholder/800/600",
-      "/api/placeholder/800/600"
+"images": [
+      "https://via.placeholder.com/800x600/40916C/FFFFFF?text=Coastal+Dream+Home",
+      "https://via.placeholder.com/800x600/52B788/FFFFFF?text=Ocean+Views",
+      "https://via.placeholder.com/800x600/1B4332/FFFFFF?text=Deck+Living",
+      "https://via.placeholder.com/800x600/D4A574/FFFFFF?text=Master+Suite"
     ],
     "videos": [],
     "story": "This coastal-inspired home captures the relaxed Bay of Plenty lifestyle. Designed to maximize views and natural light, the home features extensive decking, high ceilings, and premium coastal finishes. The indoor-outdoor living concept is seamlessly integrated throughout the design.",
@@ -91,10 +91,10 @@
     "builderId": 4,
     "region": "Wellington",
     "location": "Karori, Wellington",
-    "images": [
-      "/api/placeholder/800/600",
-      "/api/placeholder/800/600",
-      "/api/placeholder/800/600"
+"images": [
+      "https://via.placeholder.com/800x600/40916C/FFFFFF?text=Wellington+Hills+Retreat",
+      "https://via.placeholder.com/800x600/52B788/FFFFFF?text=Harbor+Views",
+      "https://via.placeholder.com/800x600/1B4332/FFFFFF?text=Hillside+Design"
     ],
     "videos": [],
     "story": "Perched on Wellington's hills with spectacular harbor views, this home combines architectural excellence with practical family living. The design works with the natural contours of the land, creating multiple levels of living space that capture different aspects and views.",
@@ -119,10 +119,10 @@
     "builderId": 5,
     "region": "Canterbury",
     "location": "Christchurch, Canterbury",
-    "images": [
-      "/api/placeholder/800/600",
-      "/api/placeholder/800/600",
-      "/api/placeholder/800/600"
+"images": [
+      "https://via.placeholder.com/800x600/40916C/FFFFFF?text=Canterbury+Contemporary",
+      "https://via.placeholder.com/800x600/52B788/FFFFFF?text=Modern+Living",
+      "https://via.placeholder.com/800x600/1B4332/FFFFFF?text=Smart+Home"
     ],
     "videos": [],
     "story": "This contemporary Christchurch home demonstrates how modern design can create warm, inviting living spaces. Built with earthquake-resilient construction methods, the home features sustainable materials and smart home technology integration throughout.",
@@ -147,11 +147,11 @@
     "builderId": 6,
     "region": "Otago",
     "location": "Wanaka, Otago",
-    "images": [
-      "/api/placeholder/800/600",
-      "/api/placeholder/800/600",
-      "/api/placeholder/800/600",
-      "/api/placeholder/800/600"
+"images": [
+      "https://via.placeholder.com/800x600/40916C/FFFFFF?text=Otago+Alpine+Lodge",
+      "https://via.placeholder.com/800x600/52B788/FFFFFF?text=Mountain+Views",
+      "https://via.placeholder.com/800x600/1B4332/FFFFFF?text=Alpine+Interior",
+      "https://via.placeholder.com/800x600/D4A574/FFFFFF?text=Luxury+Finishes"
     ],
     "videos": [],
     "story": "This stunning alpine lodge showcases how luxury and comfort can be achieved in challenging mountain environments. The home features premium natural materials, underfloor heating, and panoramic windows that frame the spectacular mountain views.",

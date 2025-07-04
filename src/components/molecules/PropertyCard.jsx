@@ -1,58 +1,87 @@
-import { motion } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
-import Card from '@/components/atoms/Card'
-import Badge from '@/components/atoms/Badge'
-import Button from '@/components/atoms/Button'
-import ApperIcon from '@/components/ApperIcon'
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import ApperIcon from "@/components/ApperIcon";
+import Badge from "@/components/atoms/Badge";
+import Button from "@/components/atoms/Button";
+import Card from "@/components/atoms/Card";
 
-const PropertyCard = ({ property, type = 'land', showMatchScore = false, matchScore = 0 }) => {
+function PropertyCard({ property, type = 'land', showMatchScore = false, matchScore = 0, onViewDetails, onShortlist }) {
   const navigate = useNavigate()
-  
-  const handleViewDetails = () => {
-    navigate(`/property/${property.Id}`)
-  }
-  
-  const formatPrice = (price, priceType) => {
-    if (priceType === 'poa') return 'POA'
-    if (priceType === 'auction') return 'Auction'
-    if (!price) return 'Price on application'
-    return `$${price.toLocaleString()}`
-  }
-  
-  const getPropertyIcon = () => {
-    switch (type) {
-      case 'land': return 'MapPin'
-      case 'concept': return 'Home'
-      case 'showcase': return 'Award'
-      default: return 'Building'
+  const [imageError, setImageError] = useState(false)
+  const [imageLoading, setImageLoading] = useState(true)
+function handleViewDetails() {
+    if (onViewDetails) {
+      onViewDetails(property)
+    } else {
+      navigate(`/property/${property.Id}`)
     }
   }
-  
-  const getPropertyTypeColor = () => {
-    switch (type) {
-      case 'land': return 'primary'
-      case 'concept': return 'secondary'
-      case 'showcase': return 'accent'
-      default: return 'default'
-    }
+
+  function handleImageError() {
+    setImageError(true)
+    setImageLoading(false)
   }
-  
+
+  function handleImageLoad() {
+    setImageLoading(false)
+  }
+
+  function formatPrice(price, priceType) {
+    if (!price) return 'Price on enquiry'
+    return `$${price.toLocaleString()}${priceType === 'weekly' ? '/week' : ''}`
+  }
+
+  function getPropertyIcon() {
+    return type === 'land' ? 'MapPin' : 'Home'
+  }
+
+function getPropertyTypeColor() {
+    return type === 'land' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800'
+  }
+
+  function getImageSrc() {
+    if (imageError) {
+      return `https://via.placeholder.com/400x300/40916C/FFFFFF?text=${encodeURIComponent(property.title || 'Property Image')}`
+    }
+    
+    const primaryImage = property.images?.[0] || property.image
+    if (!primaryImage) {
+      return `https://via.placeholder.com/400x300/40916C/FFFFFF?text=${encodeURIComponent(property.title || 'Property Image')}`
+    }
+    
+    return primaryImage
+  }
+
   return (
     <motion.div
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.2 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="w-full"
     >
-      <Card hover className="overflow-hidden h-full">
-        {/* Image */}
-        <div className="relative h-48 overflow-hidden rounded-t-xl">
-          <img
-            src={property.images?.[0] || '/api/placeholder/400/300'}
-            alt={property.title || property.name}
-            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-          />
+      <Card className="overflow-hidden group cursor-pointer property-card" onClick={handleViewDetails}>
+        <div className="relative">
+          <div className="aspect-[4/3] overflow-hidden">
+            {imageLoading && (
+              <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
+                <ApperIcon name="Image" size={48} className="text-gray-400" />
+              </div>
+            )}
+            <img 
+              src={getImageSrc()}
+              alt={property.title || 'Property'} 
+              className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ${
+                imageLoading ? 'opacity-0' : 'opacity-100'
+              }`}
+              onError={handleImageError}
+              onLoad={handleImageLoad}
+              loading="lazy"
+            />
+          </div>
           
-          {/* Badges */}
-          <div className="absolute top-3 left-3 flex gap-2">
+          {/* Property Type & Match Score Badges */}
+          <div className="absolute top-3 left-3 flex flex-col gap-2">
             <Badge variant={getPropertyTypeColor()} icon={getPropertyIcon()} size="sm">
               {type === 'land' ? 'Land' : type === 'concept' ? 'Plan' : 'Showcase'}
             </Badge>
