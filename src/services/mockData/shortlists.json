@@ -1,0 +1,39 @@
+[
+  {
+    "Id": 1,
+    "userId": 1,
+    "name": "Auckland Favorites",
+    "items": [1, 2, 3],
+    "sharedWith": [],
+    "comments": [],
+    "createdAt": "2024-01-15T12:00:00Z",
+    "updatedAt": "2024-01-20T15:30:00Z"
+  },
+  {
+    "Id": 2,
+    "userId": 1,
+    "name": "Coastal Properties",
+    "items": [3, 4],
+    "sharedWith": ["partner@example.com"],
+    "comments": [
+      {
+        "Id": 1,
+        "author": "partner@example.com",
+        "message": "Love the beachfront option!",
+        "createdAt": "2024-01-18T10:00:00Z"
+      }
+    ],
+    "createdAt": "2024-01-18T08:00:00Z",
+    "updatedAt": "2024-01-18T10:00:00Z"
+  },
+  {
+    "Id": 3,
+    "userId": 1,
+    "name": "Family Home Plans",
+    "items": [1, 2, 3],
+    "sharedWith": [],
+    "comments": [],
+    "createdAt": "2024-01-20T16:00:00Z",
+    "updatedAt": "2024-01-20T16:00:00Z"
+  }
+]

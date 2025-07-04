@@ -1,0 +1,152 @@
+[
+  {
+    "Id": 1,
+    "name": "Auckland Premier Builders",
+    "region": "Auckland",
+    "specialty": "Luxury Custom Homes",
+    "rating": 4.9,
+    "projectsCompleted": 150,
+    "yearsInBusiness": 15,
+    "contact": {
+      "email": "info@aucklandpremier.co.nz",
+      "phone": "09 123 4567",
+      "website": "www.aucklandpremier.co.nz"
+    },
+    "services": [
+      "Custom Home Building",
+      "Luxury Renovations",
+      "Architectural Design",
+      "Project Management"
+    ],
+    "certifications": [
+      "Licensed Building Practitioner",
+      "Master Builders Association",
+      "Site Safe Certified"
+    ]
+  },
+  {
+    "Id": 2,
+    "name": "Waikato Family Builders",
+    "region": "Waikato",
+    "specialty": "Family Homes & Lifestyle Blocks",
+    "rating": 4.8,
+    "projectsCompleted": 120,
+    "yearsInBusiness": 12,
+    "contact": {
+      "email": "hello@waikatofamily.co.nz",
+      "phone": "07 456 7890",
+      "website": "www.waikatofamily.co.nz"
+    },
+    "services": [
+      "New Home Construction",
+      "Lifestyle Block Homes",
+      "Extensions & Additions",
+      "Barn Conversions"
+    ],
+    "certifications": [
+      "Licensed Building Practitioner",
+      "Master Builders Association",
+      "Certified Builders Association"
+    ]
+  },
+  {
+    "Id": 3,
+    "name": "Bay Coastal Builders",
+    "region": "Bay of Plenty",
+    "specialty": "Coastal & Beachfront Homes",
+    "rating": 4.7,
+    "projectsCompleted": 85,
+    "yearsInBusiness": 10,
+    "contact": {
+      "email": "build@baycoastal.co.nz",
+      "phone": "07 789 0123",
+      "website": "www.baycoastal.co.nz"
+    },
+    "services": [
+      "Coastal Home Construction",
+      "Beachfront Properties",
+      "Holiday Home Building",
+      "Weatherboard Specialists"
+    ],
+    "certifications": [
+      "Licensed Building Practitioner",
+      "Master Builders Association",
+      "Coastal Building Specialist"
+    ]
+  },
+  {
+    "Id": 4,
+    "name": "Wellington Hills Construction",
+    "region": "Wellington",
+    "specialty": "Challenging Sites & Hill Builds",
+    "rating": 4.8,
+    "projectsCompleted": 95,
+    "yearsInBusiness": 13,
+    "contact": {
+      "email": "info@wellingtonhills.co.nz",
+      "phone": "04 567 8901",
+      "website": "www.wellingtonhills.co.nz"
+    },
+    "services": [
+      "Challenging Site Construction",
+      "Hill Side Builds",
+      "Seismic Upgrades",
+      "Contemporary Architecture"
+    ],
+    "certifications": [
+      "Licensed Building Practitioner",
+      "Structural Engineering Partner",
+      "Seismic Construction Certified"
+    ]
+  },
+  {
+    "Id": 5,
+    "name": "Canterbury Craft Builders",
+    "region": "Canterbury",
+    "specialty": "Sustainable & Eco-Friendly Builds",
+    "rating": 4.9,
+    "projectsCompleted": 110,
+    "yearsInBusiness": 11,
+    "contact": {
+      "email": "craft@canterburycraft.co.nz",
+      "phone": "03 234 5678",
+      "website": "www.canterburycraft.co.nz"
+    },
+    "services": [
+      "Sustainable Building",
+      "Eco-Friendly Materials",
+      "Passive House Design",
+      "Energy Efficient Homes"
+    ],
+    "certifications": [
+      "Licensed Building Practitioner",
+      "Green Building Council",
+      "Passive House Certified"
+    ]
+  },
+  {
+    "Id": 6,
+    "name": "Otago Alpine Builders",
+    "region": "Otago",
+    "specialty": "Alpine & Mountain Construction",
+    "rating": 4.8,
+    "projectsCompleted": 65,
+    "yearsInBusiness": 8,
+    "contact": {
+      "email": "alpine@otagoalpine.co.nz",
+      "phone": "03 345 6789",
+      "website": "www.otagoalpine.co.nz"
+    },
+    "services": [
+      "Alpine Construction",
+      "Mountain Homes",
+      "Luxury Lodges",
+      "Extreme Weather Building"
+    ],
+    "certifications": [
+      "Licensed Building Practitioner",
+      "Alpine Construction Specialist",
+      "Master Builders Association"
+    ]
+  }
+]

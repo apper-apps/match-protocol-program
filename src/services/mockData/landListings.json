@@ -1,0 +1,173 @@
+[
+  {
+    "Id": 1,
+    "title": "Prime Auckland Section",
+    "location": "Remuera, Auckland",
+    "region": "Auckland",
+    "price": 850000,
+    "priceType": "fixed",
+    "area": 750,
+    "images": [
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600"
+    ],
+    "description": "Exceptional 750m² section in sought-after Remuera. Elevated position with stunning views over Auckland city. All services available including power, water, and sewerage. Perfect for your dream home with easy access to schools, shopping, and transport links.",
+    "features": [
+      "Elevated position",
+      "City views",
+      "All services connected",
+      "Fully fenced",
+      "Mature trees",
+      "Quiet street",
+      "Close to schools",
+      "Easy access to motorway"
+    ],
+    "ownerId": "owner1",
+    "status": "active",
+    "createdAt": "2024-01-15T10:00:00Z"
+  },
+  {
+    "Id": 2,
+    "title": "Lifestyle Block - Waikato",
+    "location": "Te Awamutu, Waikato",
+    "region": "Waikato",
+    "price": 420000,
+    "priceType": "fixed",
+    "area": 5000,
+    "images": [
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600"
+    ],
+    "description": "Fantastic 5000m² lifestyle block offering the perfect blend of rural living with urban convenience. Gentle contour with established native plantings. Ideal for families seeking space and tranquility while remaining close to town amenities.",
+    "features": [
+      "5000m² of land",
+      "Rural outlook",
+      "Native plantings",
+      "Gentle contour",
+      "Close to town",
+      "School bus route",
+      "Bore water available",
+      "Separate building sites"
+    ],
+    "ownerId": "owner2",
+    "status": "active",
+    "createdAt": "2024-01-18T14:30:00Z"
+  },
+  {
+    "Id": 3,
+    "title": "Beachfront Land Opportunity",
+    "location": "Mount Maunganui, Bay of Plenty",
+    "region": "Bay of Plenty",
+    "price": null,
+    "priceType": "poa",
+    "area": 600,
+    "images": [
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600"
+    ],
+    "description": "Rare opportunity to secure prime beachfront land in Mount Maunganui. 600m² of absolute beachfront with unobstructed ocean views. Perfect for building your dream coastal home with direct beach access.",
+    "features": [
+      "Absolute beachfront",
+      "Ocean views",
+      "Direct beach access",
+      "600m² flat section",
+      "All services available",
+      "Prestigious location",
+      "Walking distance to amenities",
+      "Investment potential"
+    ],
+    "ownerId": "owner3",
+    "status": "active",
+    "createdAt": "2024-01-20T09:15:00Z"
+  },
+  {
+    "Id": 4,
+    "title": "Wellington Hill Section",
+    "location": "Karori, Wellington",
+    "region": "Wellington",
+    "price": 650000,
+    "priceType": "fixed",
+    "area": 800,
+    "images": [
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600"
+    ],
+    "description": "Elevated 800m² section in popular Karori with panoramic harbor views. North-facing aspect ensuring all-day sun. Close to excellent schools and recreational facilities. Perfect for building a family home with spectacular views.",
+    "features": [
+      "Harbor views",
+      "North-facing",
+      "All-day sun",
+      "Close to schools",
+      "Recreational facilities nearby",
+      "Elevated position",
+      "Established neighborhood",
+      "Public transport access"
+    ],
+    "ownerId": "owner4",
+    "status": "active",
+    "createdAt": "2024-01-22T11:45:00Z"
+  },
+  {
+    "Id": 5,
+    "title": "Christchurch Garden Section",
+    "location": "Fendalton, Christchurch",
+    "region": "Canterbury",
+    "price": 580000,
+    "priceType": "fixed",
+    "area": 900,
+    "images": [
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600"
+    ],
+    "description": "Beautiful 900m² garden section in prestigious Fendalton. Mature trees and established gardens provide a stunning backdrop for your new home. Flat, easy-to-build-on section with all services connected.",
+    "features": [
+      "Mature trees",
+      "Established gardens",
+      "Flat building site",
+      "All services connected",
+      "Prestigious location",
+      "Wide frontage",
+      "Private setting",
+      "Close to university"
+    ],
+    "ownerId": "owner5",
+    "status": "active",
+    "createdAt": "2024-01-25T16:20:00Z"
+  },
+  {
+    "Id": 6,
+    "title": "Queenstown Alpine Views",
+    "location": "Arrowtown, Otago",
+    "region": "Otago",
+    "price": null,
+    "priceType": "auction",
+    "area": 1200,
+    "images": [
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600"
+    ],
+    "description": "Spectacular 1200m² section with breathtaking alpine views in historic Arrowtown. Unique opportunity to build in one of New Zealand's most picturesque locations. Easy access to Queenstown and world-class skiing.",
+    "features": [
+      "Alpine views",
+      "Historic location",
+      "Large section",
+      "Easy Queenstown access",
+      "Skiing nearby",
+      "Tourist destination",
+      "Investment opportunity",
+      "Unique character"
+    ],
+    "ownerId": "owner6",
+    "status": "active",
+    "createdAt": "2024-01-28T13:10:00Z"
+  }
+]

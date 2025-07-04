@@ -1,0 +1,32 @@
+[
+  {
+    "Id": 1,
+    "userId": 1,
+    "landListingId": 1,
+    "conceptPlanId": 1,
+    "compatibilityScore": 85,
+    "notes": "Great combination of premium land and spacious family home design. The elevated position will complement the modern architecture beautifully.",
+    "createdAt": "2024-01-20T10:30:00Z",
+    "updatedAt": "2024-01-20T10:30:00Z"
+  },
+  {
+    "Id": 2,
+    "userId": 1,
+    "landListingId": 2,
+    "conceptPlanId": 4,
+    "compatibilityScore": 92,
+    "notes": "Perfect match for lifestyle living. The coastal retreat design will work wonderfully on this spacious rural block.",
+    "createdAt": "2024-01-22T14:15:00Z",
+    "updatedAt": "2024-01-22T14:15:00Z"
+  },
+  {
+    "Id": 3,
+    "userId": 1,
+    "landListingId": 3,
+    "conceptPlanId": 4,
+    "compatibilityScore": 95,
+    "notes": "Outstanding beachfront opportunity with coastal-inspired design. This combination offers the ultimate in coastal living.",
+    "createdAt": "2024-01-25T09:45:00Z",
+    "updatedAt": "2024-01-25T09:45:00Z"
+  }
+]

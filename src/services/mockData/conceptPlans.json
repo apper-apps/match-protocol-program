@@ -1,0 +1,99 @@
+[
+  {
+    "Id": 1,
+    "name": "Modern Family Home",
+    "floorArea": 180,
+    "bedrooms": 4,
+    "bathrooms": 2,
+    "garageSpaces": 2,
+    "lounges": 1,
+    "estimatedPrice": 320000,
+    "images": [
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600"
+    ],
+    "description": "Contemporary 4-bedroom family home featuring open plan living, modern kitchen with scullery, and master bedroom with ensuite. Perfect for growing families with spacious living areas and practical design."
+  },
+  {
+    "Id": 2,
+    "name": "Compact Contemporary",
+    "floorArea": 120,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "garageSpaces": 1,
+    "lounges": 1,
+    "estimatedPrice": 240000,
+    "images": [
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600"
+    ],
+    "description": "Efficient 3-bedroom design maximizing space and natural light. Perfect for first-home buyers or downsizers. Features include open plan living, modern kitchen, and private outdoor living area."
+  },
+  {
+    "Id": 3,
+    "name": "Luxury Executive",
+    "floorArea": 280,
+    "bedrooms": 5,
+    "bathrooms": 3,
+    "garageSpaces": 3,
+    "lounges": 2,
+    "estimatedPrice": 480000,
+    "images": [
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600"
+    ],
+    "description": "Luxurious 5-bedroom executive home with multiple living areas, gourmet kitchen, and premium finishes throughout. Features home office, media room, and expansive outdoor entertaining area."
+  },
+  {
+    "Id": 4,
+    "name": "Coastal Retreat",
+    "floorArea": 200,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "garageSpaces": 2,
+    "lounges": 2,
+    "estimatedPrice": 360000,
+    "images": [
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600"
+    ],
+    "description": "Relaxed coastal-inspired design with emphasis on indoor-outdoor living. Features include covered outdoor dining, separate lounge, and bedrooms positioned for privacy and views."
+  },
+  {
+    "Id": 5,
+    "name": "Urban Townhouse",
+    "floorArea": 150,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "garageSpaces": 1,
+    "lounges": 1,
+    "estimatedPrice": 285000,
+    "images": [
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600"
+    ],
+    "description": "Modern townhouse design perfect for inner-city living. Two-story layout with living areas downstairs and bedrooms upstairs. Features include courtyard garden and integrated garage."
+  },
+  {
+    "Id": 6,
+    "name": "Starter Home Special",
+    "floorArea": 100,
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "garageSpaces": 1,
+    "lounges": 1,
+    "estimatedPrice": 180000,
+    "images": [
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600"
+    ],
+    "description": "Affordable 2-bedroom starter home with smart layout and modern features. Perfect for young couples or investors. Includes open plan living, modern kitchen, and covered outdoor area."
+  }
+]

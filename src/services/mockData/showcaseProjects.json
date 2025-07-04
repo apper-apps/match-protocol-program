@@ -1,0 +1,173 @@
+[
+  {
+    "Id": 1,
+    "title": "Auckland Executive Build",
+    "builderId": 1,
+    "region": "Auckland",
+    "location": "Remuera, Auckland",
+    "images": [
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600"
+    ],
+    "videos": [],
+    "story": "This stunning executive home showcases the perfect blend of contemporary design and family functionality. Built on a premium Remuera site, the home features high-end finishes throughout including natural stone, hardwood floors, and premium fixtures. The open-plan living areas flow seamlessly to outdoor entertaining spaces, while the private wing houses four generous bedrooms including a luxurious master suite.",
+    "testimonials": [
+      {
+        "client": "Sarah & Mike Johnson",
+        "text": "The team delivered beyond our expectations. The attention to detail and quality of workmanship is exceptional. We couldn't be happier with our new home."
+      }
+    ],
+    "specs": {
+      "floorArea": 280,
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "garageSpaces": 2,
+      "completionDate": "2023-11-15"
+    },
+    "estimatedCost": 850000
+  },
+  {
+    "Id": 2,
+    "title": "Waikato Family Haven",
+    "builderId": 2,
+    "region": "Waikato",
+    "location": "Hamilton, Waikato",
+    "images": [
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600"
+    ],
+    "videos": [],
+    "story": "A beautiful family home designed for comfortable living and entertaining. This project showcases how thoughtful design can create spacious, light-filled living areas within a practical family layout. The home features sustainable materials and energy-efficient systems throughout.",
+    "testimonials": [
+      {
+        "client": "The Thompson Family",
+        "text": "Our builder understood exactly what we wanted for our growing family. The process was smooth and the result exceeded our dreams."
+      }
+    ],
+    "specs": {
+      "floorArea": 220,
+      "bedrooms": 4,
+      "bathrooms": 2,
+      "garageSpaces": 2,
+      "completionDate": "2023-09-20"
+    },
+    "estimatedCost": 620000
+  },
+  {
+    "Id": 3,
+    "title": "Bay of Plenty Coastal Dream",
+    "builderId": 3,
+    "region": "Bay of Plenty",
+    "location": "Tauranga, Bay of Plenty",
+    "images": [
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600"
+    ],
+    "videos": [],
+    "story": "This coastal-inspired home captures the relaxed Bay of Plenty lifestyle. Designed to maximize views and natural light, the home features extensive decking, high ceilings, and premium coastal finishes. The indoor-outdoor living concept is seamlessly integrated throughout the design.",
+    "testimonials": [
+      {
+        "client": "David & Rachel Chen",
+        "text": "Living in this home feels like being on permanent vacation. The quality and attention to detail is outstanding."
+      }
+    ],
+    "specs": {
+      "floorArea": 240,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "garageSpaces": 2,
+      "completionDate": "2023-12-10"
+    },
+    "estimatedCost": 720000
+  },
+  {
+    "Id": 4,
+    "title": "Wellington Hills Retreat",
+    "builderId": 4,
+    "region": "Wellington",
+    "location": "Karori, Wellington",
+    "images": [
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600"
+    ],
+    "videos": [],
+    "story": "Perched on Wellington's hills with spectacular harbor views, this home combines architectural excellence with practical family living. The design works with the natural contours of the land, creating multiple levels of living space that capture different aspects and views.",
+    "testimonials": [
+      {
+        "client": "Emma & James Wilson",
+        "text": "The views from our new home are breathtaking. The builder's expertise in working with challenging sites is evident in every detail."
+      }
+    ],
+    "specs": {
+      "floorArea": 200,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "garageSpaces": 1,
+      "completionDate": "2023-10-05"
+    },
+    "estimatedCost": 680000
+  },
+  {
+    "Id": 5,
+    "title": "Canterbury Contemporary",
+    "builderId": 5,
+    "region": "Canterbury",
+    "location": "Christchurch, Canterbury",
+    "images": [
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600"
+    ],
+    "videos": [],
+    "story": "This contemporary Christchurch home demonstrates how modern design can create warm, inviting living spaces. Built with earthquake-resilient construction methods, the home features sustainable materials and smart home technology integration throughout.",
+    "testimonials": [
+      {
+        "client": "Lisa & Andrew Brown",
+        "text": "Our home is not just beautiful but also incredibly functional. The smart home features and sustainable design make it perfect for modern living."
+      }
+    ],
+    "specs": {
+      "floorArea": 180,
+      "bedrooms": 4,
+      "bathrooms": 2,
+      "garageSpaces": 2,
+      "completionDate": "2023-08-30"
+    },
+    "estimatedCost": 580000
+  },
+  {
+    "Id": 6,
+    "title": "Otago Alpine Lodge",
+    "builderId": 6,
+    "region": "Otago",
+    "location": "Wanaka, Otago",
+    "images": [
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600",
+      "/api/placeholder/800/600"
+    ],
+    "videos": [],
+    "story": "This stunning alpine lodge showcases how luxury and comfort can be achieved in challenging mountain environments. The home features premium natural materials, underfloor heating, and panoramic windows that frame the spectacular mountain views.",
+    "testimonials": [
+      {
+        "client": "Mark & Sophie Taylor",
+        "text": "Our alpine retreat is everything we dreamed of and more. The builder's expertise in mountain construction is evident in every detail."
+      }
+    ],
+    "specs": {
+      "floorArea": 320,
+      "bedrooms": 5,
+      "bathrooms": 3,
+      "garageSpaces": 3,
+      "completionDate": "2023-07-15"
+    },
+    "estimatedCost": 950000
+  }
+]
