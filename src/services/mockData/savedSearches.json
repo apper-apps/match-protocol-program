@@ -1,0 +1,117 @@
+[
+  {
+    "id": "ss-001",
+    "name": "Auckland Family Homes",
+    "filters": {
+      "location": "Auckland",
+      "propertyType": "house",
+      "priceRange": {
+        "min": 800000,
+        "max": 1200000
+      },
+      "bedrooms": {
+        "min": 3,
+        "max": 5
+      },
+      "bathrooms": {
+        "min": 2,
+        "max": null
+      },
+      "keywords": ["family", "school zone"]
+    },
+    "createdAt": "2024-01-15T10:30:00Z",
+    "updatedAt": "2024-01-15T10:30:00Z"
+  },
+  {
+    "id": "ss-002",
+    "name": "Wellington Apartments",
+    "filters": {
+      "location": "Wellington",
+      "propertyType": "apartment",
+      "priceRange": {
+        "min": 500000,
+        "max": 800000
+      },
+      "bedrooms": {
+        "min": 1,
+        "max": 2
+      },
+      "bathrooms": {
+        "min": 1,
+        "max": 2
+      },
+      "keywords": ["city", "parking"]
+    },
+    "createdAt": "2024-01-20T14:15:00Z",
+    "updatedAt": "2024-01-25T09:45:00Z"
+  },
+  {
+    "id": "ss-003",
+    "name": "Christchurch Investment Properties",
+    "filters": {
+      "location": "Christchurch",
+      "propertyType": "house",
+      "priceRange": {
+        "min": 400000,
+        "max": 700000
+      },
+      "bedrooms": {
+        "min": 2,
+        "max": 4
+      },
+      "bathrooms": {
+        "min": 1,
+        "max": null
+      },
+      "keywords": ["investment", "rental"]
+    },
+    "createdAt": "2024-02-01T16:20:00Z",
+    "updatedAt": "2024-02-01T16:20:00Z"
+  },
+  {
+    "id": "ss-004",
+    "name": "Queenstown Luxury Homes",
+    "filters": {
+      "location": "Queenstown",
+      "propertyType": "house",
+      "priceRange": {
+        "min": 1500000,
+        "max": 3000000
+      },
+      "bedrooms": {
+        "min": 4,
+        "max": 6
+      },
+      "bathrooms": {
+        "min": 3,
+        "max": null
+      },
+      "keywords": ["luxury", "mountain view", "lake"]
+    },
+    "createdAt": "2024-02-10T11:00:00Z",
+    "updatedAt": "2024-02-15T13:30:00Z"
+  },
+  {
+    "id": "ss-005",
+    "name": "Hamilton First Home",
+    "filters": {
+      "location": "Hamilton",
+      "propertyType": "house",
+      "priceRange": {
+        "min": 600000,
+        "max": 900000
+      },
+      "bedrooms": {
+        "min": 2,
+        "max": 3
+      },
+      "bathrooms": {
+        "min": 1,
+        "max": 2
+      },
+      "keywords": ["first home", "garden"]
+    },
+    "createdAt": "2024-02-20T08:45:00Z",
+    "updatedAt": "2024-02-20T08:45:00Z"
+  }
+]
