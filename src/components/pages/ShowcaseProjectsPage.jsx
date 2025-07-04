@@ -13,12 +13,14 @@ import Loading from "@/components/ui/Loading";
 import PropertyCard from "@/components/molecules/PropertyCard";
 import { getShowcaseProjects } from "@/services/api/propertyService";
 function ShowcaseProjectsPage() {
-  const navigate = useNavigate()
+const navigate = useNavigate()
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [imageErrors, setImageErrors] = useState({})
   const [imageLoading, setImageLoading] = useState({})
+  const [showModal, setShowModal] = useState(false)
+  const [selectedProject, setSelectedProject] = useState(null)
   const [filters, setFilters] = useState({
     search: '',
     region: '',
@@ -109,8 +111,9 @@ return projects.filter(project => {
     }))
   }
 
-  function handleProjectClick(project) {
-    navigate(`/project/${project.Id}`)
+function handleProjectClick(project) {
+    setSelectedProject(project)
+    setShowModal(true)
   }
 
   function handleContactBuilder(project) {
@@ -144,9 +147,8 @@ return projects.filter(project => {
     { value: '600-800', label: '$600k - $800k' },
     { value: '800-1000', label: '$800k - $1M' },
     { value: '1000-1500', label: '$1M - $1.5M' },
-    { value: '1500-2000', label: '$1.5M+' }
-]
-
+{ value: '1500-2000', label: '$1.5M+' }
+  ]
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -234,9 +236,8 @@ return projects.filter(project => {
               <Card className="h-full hover:shadow-lg transition-shadow duration-300 overflow-hidden">
                 <div className="aspect-[4/3] overflow-hidden rounded-lg relative">
                   {imageLoading[`${project.Id}-0`] && (
-                    <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
+<div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
                       <ApperIcon name="Image" size={48} className="text-gray-400" />
-<ApperIcon name="Image" size={48} className="text-gray-400" />
                     </div>
                   )}
                   <img 
