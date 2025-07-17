@@ -1,5 +1,10 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* React Toastify Styles */
 @import 'react-toastify/dist/ReactToastify.css';
+
 /* Custom toast styling */
 .Toastify__toast-container {
   z-index: 9999;

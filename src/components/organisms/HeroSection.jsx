@@ -30,9 +30,10 @@ const HeroSection = () => {
   ]
   
   return (
-<section className="relative overflow-hidden bg-gradient-to-br from-primary via-secondary to-accent">
-      {/* Background Overlay */}
-      <div className="absolute inset-0 bg-black/20" />
+    <section className="relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-accent opacity-90" />
+      <div className="absolute inset-0 bg-black opacity-20" />
       
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">

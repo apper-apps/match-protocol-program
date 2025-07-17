@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import ApperIcon from "@/components/ApperIcon";
-import Empty from "@/components/ui/Empty";
-import Error from "@/components/ui/Error";
-import Loading from "@/components/ui/Loading";
-import PropertyCard from "@/components/molecules/PropertyCard";
-import Button from "@/components/atoms/Button";
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import PropertyCard from '@/components/molecules/PropertyCard'
+import Loading from '@/components/ui/Loading'
+import Error from '@/components/ui/Error'
+import Empty from '@/components/ui/Empty'
+import Button from '@/components/atoms/Button'
+import ApperIcon from '@/components/ApperIcon'
 
 const PropertyGrid = ({ 
   properties = [], 
@@ -15,8 +15,7 @@ const PropertyGrid = ({
   viewMode = 'grid',
   onViewModeChange,
   propertyType = 'all',
-  showMatchScores = false,
-  onLandSelect
+  showMatchScores = false
 }) => {
   const [sortBy, setSortBy] = useState('newest')
   const [sortedProperties, setSortedProperties] = useState([])
@@ -145,21 +144,18 @@ const PropertyGrid = ({
               : 'space-y-4'
           }
         >
-{sortedProperties.map((property, index) => (
+          {sortedProperties.map((property, index) => (
             <motion.div
               key={property.Id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
             >
-<PropertyCard
+              <PropertyCard
                 property={property}
                 type={propertyType}
                 showMatchScore={showMatchScores}
                 matchScore={property.matchScore || Math.floor(Math.random() * 40) + 60}
-                onViewDetails={property.type === 'land' && onLandSelect ? 
-                  (prop) => onLandSelect(prop) : undefined
-                }
               />
             </motion.div>
           ))}

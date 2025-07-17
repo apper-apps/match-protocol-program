@@ -1,125 +1,110 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { motion } from "framer-motion";
-import { toast } from "react-toastify";
-import ApperIcon from "@/components/ApperIcon";
-import Badge from "@/components/atoms/Badge";
-import Button from "@/components/atoms/Button";
-import Card from "@/components/atoms/Card";
-import Input from "@/components/atoms/Input";
-import Error from "@/components/ui/Error";
-import Loading from "@/components/ui/Loading";
-import { getPropertyById } from "@/services/api/propertyService";
+import { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { toast } from 'react-toastify'
+import Button from '@/components/atoms/Button'
+import Card from '@/components/atoms/Card'
+import Badge from '@/components/atoms/Badge'
+import Input from '@/components/atoms/Input'
+import Loading from '@/components/ui/Loading'
+import Error from '@/components/ui/Error'
+import ApperIcon from '@/components/ApperIcon'
+import { getPropertyById } from '@/services/api/propertyService'
 
-function PropertyDetailPage() {
+const PropertyDetailPage = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const [property, setProperty] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [enquiryForm, setEnquiryForm] = useState({
+  const [selectedImage, setSelectedImage] = useState(0)
+  const [showEnquiryForm, setShowEnquiryForm] = useState(false)
+  const [enquiryData, setEnquiryData] = useState({
     name: '',
     email: '',
     phone: '',
     message: ''
   })
-  const [enquiryLoading, setEnquiryLoading] = useState(false)
-  const [selectedImage, setSelectedImage] = useState(0)
-  const [imageErrors, setImageErrors] = useState({})
-  const [imageLoading, setImageLoading] = useState({})
-  const [showEnquiryForm, setShowEnquiryForm] = useState(false)
   
   useEffect(() => {
     loadProperty()
   }, [id])
-
-  async function loadProperty() {
+  
+  const loadProperty = async () => {
     try {
       setLoading(true)
-setError(null)
-      const data = await getPropertyById(id)
-      setProperty(data)
+      setError(null)
       
-      // Initialize image loading states
-      if (data?.images) {
-        const initialLoading = {}
-        data.images.forEach((_, index) => {
-          initialLoading[index] = true
-        })
-        setImageLoading(initialLoading)
-      }
+      const propertyData = await getPropertyById(parseInt(id))
+      setProperty(propertyData)
     } catch (err) {
       setError(err.message)
     } finally {
       setLoading(false)
     }
   }
-
-  function handleImageError(index) {
-    setImageErrors(prev => ({ ...prev, [index]: true }))
-    setImageLoading(prev => ({ ...prev, [index]: false }))
-  }
-
-  function handleImageLoad(index) {
-    setImageLoading(prev => ({ ...prev, [index]: false }))
-  }
-
-  function getImageSrc(image, index) {
-    if (imageErrors[index]) {
-      return `https://via.placeholder.com/800x600/40916C/FFFFFF?text=${encodeURIComponent(property?.title || 'Property Image')}`
-    }
-    
-    if (!image) {
-      return `https://via.placeholder.com/800x600/40916C/FFFFFF?text=${encodeURIComponent(property?.title || 'Property Image')}`
-    }
-    
-    return image
-  }
-
-  async function handleEnquirySubmit(e) {
+  
+  const handleEnquirySubmit = async (e) => {
     e.preventDefault()
-    setEnquiryLoading(true)
+    
+    // Validate form
+    if (!enquiryData.name || !enquiryData.email || !enquiryData.message) {
+      toast.error('Please fill in all required fields')
+      return
+    }
     
     try {
-// Simulate API call
+      // In a real app, this would send the enquiry to the backend
       await new Promise(resolve => setTimeout(resolve, 1000))
       
-      toast.success('Enquiry submitted successfully!')
-      setEnquiryForm({
-        name: '',
-        email: '',
-        phone: '',
-        message: ''
-      })
+      toast.success('Enquiry sent successfully! We\'ll be in touch soon.')
+      setShowEnquiryForm(false)
+      setEnquiryData({ name: '', email: '', phone: '', message: '' })
     } catch (err) {
-      toast.error('Failed to submit enquiry. Please try again.')
-    } finally {
-      setEnquiryLoading(false)
+      toast.error('Failed to send enquiry. Please try again.')
     }
   }
-
-  function handleInputChange(field, value) {
-    setEnquiryForm(prev => ({
-      ...prev,
-      [field]: value
-    }))
+  
+  const handleInputChange = (field, value) => {
+    setEnquiryData(prev => ({ ...prev, [field]: value }))
   }
-
-  function formatPrice(price, priceType) {
-if (!price) return 'Price on enquiry'
-    return `$${price.toLocaleString()}${priceType === 'weekly' ? '/week' : ''}`
+  
+  const formatPrice = (price, priceType) => {
+    if (priceType === 'poa') return 'POA'
+    if (priceType === 'auction') return 'Auction'
+    if (!price) return 'Price on application'
+    return `$${price.toLocaleString()}`
   }
-
-  function getPropertyType() {
-    return property?.type || 'land'
+  
+  const getPropertyType = () => {
+    if (property?.type) return property.type
+    if (property?.area && !property?.bedrooms) return 'land'
+    if (property?.floorArea && property?.bedrooms) return 'concept'
+    return 'showcase'
   }
-
-if (loading) return <Loading />
-  if (error) return <Error message={error} />
-  if (!property) return <Error message="Property not found" />
-
-  const images = property.images || []
+  
+  if (loading) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <Loading type="detail" />
+      </div>
+    )
+  }
+  
+  if (error) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <Error
+          title="Property not found"
+          message={error}
+          onRetry={loadProperty}
+        />
+      </div>
+    )
+  }
+  
   const propertyType = getPropertyType()
+  const images = property?.images || ['/api/placeholder/800/600']
   
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -131,20 +116,34 @@ if (loading) return <Loading />
         <ApperIcon name="ChevronRight" size={16} />
         <span>{property?.title || property?.name}</span>
       </div>
-
+      
       {/* Property Header */}
-      <div className="mb-8">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              {property?.title || property?.name}
-            </h1>
-            
-            <div className="flex items-center gap-2 text-gray-600">
-              <ApperIcon name="MapPin" size={16} />
-              <span>{property?.location || property?.address}</span>
-            </div>
+      <div className="flex justify-between items-start mb-8">
+        <div>
+          <div className="flex items-center gap-3 mb-2">
+            <Badge 
+              variant={propertyType === 'land' ? 'primary' : propertyType === 'concept' ? 'secondary' : 'accent'}
+              icon={propertyType === 'land' ? 'MapPin' : propertyType === 'concept' ? 'Home' : 'Award'}
+            >
+              {propertyType === 'land' ? 'Land' : propertyType === 'concept' ? 'Concept Plan' : 'Showcase Project'}
+            </Badge>
+            {property?.region && (
+              <Badge variant="default">
+                {property.region}
+              </Badge>
+            )}
           </div>
+          
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            {property?.title || property?.name}
+          </h1>
+          
+          {property?.location && (
+            <div className="flex items-center text-gray-600 mb-4">
+              <ApperIcon name="MapPin" size={20} className="mr-2" />
+              <span>{property.location}</span>
+            </div>
+          )}
           
           <div className="text-3xl font-bold text-primary">
             {formatPrice(property?.price || property?.estimatedPrice, property?.priceType)}
@@ -152,83 +151,56 @@ if (loading) return <Loading />
         </div>
         
         <div className="flex gap-2">
-<Button
+          <Button
             variant="ghost"
             size="sm"
             icon="Heart"
-            onClick={(e) => {
-              e.stopPropagation()
-              toast.success('Added to favorites!')
-            }}
+            onClick={() => toast.success('Added to favorites')}
           />
           <Button
             variant="ghost"
             size="sm"
             icon="Share"
-            onClick={(e) => {
-              e.stopPropagation()
-              if (navigator.share) {
-                navigator.share({ 
-                  title: property?.title || property?.name,
-                  text: `Check out this property on Match.nz`,
-                  url: window.location.href 
-                })
-              } else {
-                navigator.clipboard.writeText(window.location.href)
-                toast.success('Share link copied to clipboard!')
-              }
-            }}
+            onClick={() => navigator.share?.({ url: window.location.href }) || toast.info('Share link copied')}
           />
         </div>
       </div>
-
+      
       {/* Images Gallery */}
-      <div className="mb-8">
-        <div className="aspect-[4/3] overflow-hidden rounded-lg relative">
-          {imageLoading[selectedImage] && (
-            <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
-              <ApperIcon name="Image" size={48} className="text-gray-400" />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        {/* Main Image */}
+        <div className="relative">
+          <img
+            src={images[selectedImage]}
+            alt={property?.title || property?.name}
+            className="w-full h-96 object-cover rounded-xl shadow-lg"
+          />
+          
+          {images.length > 1 && (
+            <div className="absolute bottom-4 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
+              {selectedImage + 1} / {images.length}
             </div>
           )}
-          <img 
-            src={getImageSrc(images[selectedImage], selectedImage)}
-            alt={`${property.title} - Image ${selectedImage + 1}`}
-            className={`w-full h-full object-cover ${
-              imageLoading[selectedImage] ? 'opacity-0' : 'opacity-100'
-            }`}
-            onError={() => handleImageError(selectedImage)}
-            onLoad={() => handleImageLoad(selectedImage)}
-          />
         </div>
         
-        {images.length > 1 && (
-          <div className="grid grid-cols-4 gap-2 mt-4">
-            {images.map((image, index) => (
-              <button
-                key={index}
-                onClick={() => setSelectedImage(index)}
-                className={`aspect-[4/3] overflow-hidden rounded-lg border-2 relative ${
-                  selectedImage === index ? 'border-secondary' : 'border-gray-200'
-                }`}
-              >
-                {imageLoading[index] && (
-                  <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
-                    <ApperIcon name="Image" size={16} className="text-gray-400" />
-                  </div>
-                )}
-                <img 
-                  src={getImageSrc(image, index)}
-                  alt={`${property.title} - Thumbnail ${index + 1}`}
-                  className={`w-full h-full object-cover ${
-                    imageLoading[index] ? 'opacity-0' : 'opacity-100'
-                  }`}
-                  onError={() => handleImageError(index)}
-                  onLoad={() => handleImageLoad(index)}
-                />
-              </button>
-            ))}
-          </div>
-        )}
+        {/* Thumbnail Grid */}
+        <div className="grid grid-cols-2 gap-4">
+          {images.slice(1, 5).map((image, index) => (
+            <button
+              key={index}
+              onClick={() => setSelectedImage(index + 1)}
+              className={`relative h-44 rounded-xl overflow-hidden ${
+                selectedImage === index + 1 ? 'ring-4 ring-primary' : ''
+              }`}
+            >
+              <img
+                src={image}
+                alt={`Property image ${index + 2}`}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </button>
+          ))}
+        </div>
       </div>
       
       {/* Property Details */}
@@ -359,10 +331,10 @@ if (loading) return <Loading />
                 </Button>
               </div>
             ) : (
-<form onSubmit={handleEnquirySubmit} className="space-y-4">
+              <form onSubmit={handleEnquirySubmit} className="space-y-4">
                 <Input
                   label="Name"
-                  value={enquiryForm.name}
+                  value={enquiryData.name}
                   onChange={(e) => handleInputChange('name', e.target.value)}
                   required
                 />
@@ -370,15 +342,15 @@ if (loading) return <Loading />
                 <Input
                   label="Email"
                   type="email"
-                  value={enquiryForm.email}
+                  value={enquiryData.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
                   required
                 />
                 
-<Input
+                <Input
                   label="Phone"
                   type="tel"
-                  value={enquiryForm.phone}
+                  value={enquiryData.phone}
                   onChange={(e) => handleInputChange('phone', e.target.value)}
                 />
                 
@@ -387,7 +359,7 @@ if (loading) return <Loading />
                     Message *
                   </label>
                   <textarea
-                    value={enquiryForm.message}
+                    value={enquiryData.message}
                     onChange={(e) => handleInputChange('message', e.target.value)}
                     rows={4}
                     className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors"
@@ -396,13 +368,12 @@ if (loading) return <Loading />
                   />
                 </div>
                 
-<div className="flex gap-2">
+                <div className="flex gap-2">
                   <Button
                     type="submit"
                     variant="primary"
                     className="flex-1"
                     icon="Send"
-                    loading={enquiryLoading}
                   >
                     Send Enquiry
                   </Button>
@@ -464,17 +435,9 @@ if (loading) return <Loading />
             <h3 className="text-xl font-semibold text-gray-900 mb-4">
               Similar Properties
             </h3>
-<div className="text-center text-gray-500 py-8">
+            <div className="text-center text-gray-500 py-8">
               <ApperIcon name="Search" size={48} className="mx-auto mb-4 text-gray-300" />
-              <p className="mb-4">Similar properties will appear here</p>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => navigate('/browse')}
-                icon="ExternalLink"
-              >
-                Browse All Properties
-              </Button>
+              <p>Similar properties will appear here</p>
             </div>
           </Card>
         </div>
