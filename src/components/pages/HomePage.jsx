@@ -111,7 +111,7 @@ const HomePage = () => {
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredProperties.map((property, index) => (
               <motion.div
-                key={property.Id || `property-${index}`}
+                key={`${property.type || 'property'}-${property.Id || 'no-id'}-${index}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
