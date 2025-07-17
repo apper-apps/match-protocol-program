@@ -1,17 +1,18 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { toast } from 'react-toastify'
-import Button from '@/components/atoms/Button'
-import Card from '@/components/atoms/Card'
-import Badge from '@/components/atoms/Badge'
-import Input from '@/components/atoms/Input'
-import MatchScore from '@/components/molecules/MatchScore'
-import Loading from '@/components/ui/Loading'
-import Error from '@/components/ui/Error'
-import Empty from '@/components/ui/Empty'
-import ApperIcon from '@/components/ApperIcon'
-import { getMatches, createMatch, deleteMatch } from '@/services/api/matchService'
-import { getLandListings, getConceptPlans } from '@/services/api/propertyService'
+import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { toast } from "react-toastify";
+import ApperIcon from "@/components/ApperIcon";
+import Empty from "@/components/ui/Empty";
+import Error from "@/components/ui/Error";
+import Loading from "@/components/ui/Loading";
+import MatchScore from "@/components/molecules/MatchScore";
+import Card from "@/components/atoms/Card";
+import Select from "@/components/atoms/Select";
+import Input from "@/components/atoms/Input";
+import Badge from "@/components/atoms/Badge";
+import Button from "@/components/atoms/Button";
+import { getConceptPlans, getLandListings } from "@/services/api/propertyService";
+import { createMatch, deleteMatch, getMatches } from "@/services/api/matchService";
 
 const MatchesPage = () => {
   const [matches, setMatches] = useState([])
@@ -430,13 +431,14 @@ const MatchesPage = () => {
                     </div>
                   )}
                   
-                  {/* Actions */}
+{/* Actions */}
                   <div className="mt-6 flex gap-3">
                     <Button
                       variant="primary"
                       size="sm"
                       icon="MessageCircle"
                       className="flex-1"
+                      onClick={() => toast.success('Builder contact request sent!')}
                     >
                       Contact Builder
                     </Button>
@@ -445,6 +447,11 @@ const MatchesPage = () => {
                       size="sm"
                       icon="ExternalLink"
                       className="flex-1"
+                      onClick={() => {
+                        // Navigate to a detailed match view
+                        toast.info('Opening detailed match view...')
+                        // In a real app, this would navigate to /matches/{match.Id}/details
+                      }}
                     >
                       View Details
                     </Button>

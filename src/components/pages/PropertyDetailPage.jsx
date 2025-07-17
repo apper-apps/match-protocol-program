@@ -152,17 +152,32 @@ if (loading) return <Loading />
         </div>
         
         <div className="flex gap-2">
-          <Button
+<Button
             variant="ghost"
             size="sm"
             icon="Heart"
-            onClick={() => toast.success('Added to favorites')}
+            onClick={(e) => {
+              e.stopPropagation()
+              toast.success('Added to favorites!')
+            }}
           />
           <Button
             variant="ghost"
             size="sm"
             icon="Share"
-            onClick={() => navigator.share?.({ url: window.location.href }) || toast.info('Share link copied')}
+            onClick={(e) => {
+              e.stopPropagation()
+              if (navigator.share) {
+                navigator.share({ 
+                  title: property?.title || property?.name,
+                  text: `Check out this property on Match.nz`,
+                  url: window.location.href 
+                })
+              } else {
+                navigator.clipboard.writeText(window.location.href)
+                toast.success('Share link copied to clipboard!')
+              }
+            }}
           />
         </div>
       </div>
@@ -449,9 +464,17 @@ if (loading) return <Loading />
             <h3 className="text-xl font-semibold text-gray-900 mb-4">
               Similar Properties
             </h3>
-            <div className="text-center text-gray-500 py-8">
+<div className="text-center text-gray-500 py-8">
               <ApperIcon name="Search" size={48} className="mx-auto mb-4 text-gray-300" />
-              <p>Similar properties will appear here</p>
+              <p className="mb-4">Similar properties will appear here</p>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => navigate('/browse')}
+                icon="ExternalLink"
+              >
+                Browse All Properties
+              </Button>
             </div>
           </Card>
         </div>

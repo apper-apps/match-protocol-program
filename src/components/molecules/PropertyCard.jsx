@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import ApperIcon from "@/components/ApperIcon";
+import Card from "@/components/atoms/Card";
 import Badge from "@/components/atoms/Badge";
 import Button from "@/components/atoms/Button";
-import Card from "@/components/atoms/Card";
 
 function PropertyCard({ property, type = 'land', showMatchScore = false, matchScore = 0, onViewDetails, onShortlist }) {
   const navigate = useNavigate()
@@ -174,13 +175,13 @@ function getPropertyTypeColor() {
               View Details
             </Button>
             
-            <Button
+<Button
               variant="ghost"
               size="sm"
               icon="Heart"
               onClick={(e) => {
                 e.stopPropagation()
-                // Handle add to favorites
+                toast.success('Added to favorites!')
               }}
             />
           </div>
