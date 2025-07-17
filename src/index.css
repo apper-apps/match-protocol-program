@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "@tailwindcss/postcss";
 @import 'react-toastify/dist/ReactToastify.css';
 /* Custom toast styling */
 .Toastify__toast-container {
