@@ -1,11 +1,11 @@
-import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
-import toast from "react-hot-toast";
-import ApperIcon from "@/components/ApperIcon";
-import Card from "@/components/atoms/Card";
-import Badge from "@/components/atoms/Badge";
-import Button from "@/components/atoms/Button";
+import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import ApperIcon from '@/components/ApperIcon';
+import Card from '@/components/atoms/Card';
+import Badge from '@/components/atoms/Badge';
+import Button from '@/components/atoms/Button';
 
 function PropertyCard({ property, type = 'land', showMatchScore = false, matchScore = 0, onViewDetails, onShortlist }) {
   const navigate = useNavigate()
