@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import PropertyGrid from '@/components/organisms/PropertyGrid'
-import FilterSidebar from '@/components/molecules/FilterSection'
-import PropertyTypeSwitch from '@/components/molecules/PropertyTypeSwitch'
-import SearchBar from '@/components/molecules/SearchBar'
-import Button from '@/components/atoms/Button'
-import ApperIcon from '@/components/ApperIcon'
-import { getLandListings, getConceptPlans, getShowcaseProjects } from '@/services/api/propertyService'
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { motion } from "framer-motion";
+import ApperIcon from "@/components/ApperIcon";
+import PropertyGrid from "@/components/organisms/PropertyGrid";
+import FilterSidebar from "@/components/molecules/FilterSection";
+import PropertyTypeSwitch from "@/components/molecules/PropertyTypeSwitch";
+import SearchBar from "@/components/molecules/SearchBar";
+import Button from "@/components/atoms/Button";
+import FloatingLandWidget from "@/components/molecules/FloatingLandWidget";
+import { getConceptPlans, getLandListings, getShowcaseProjects } from "@/services/api/propertyService";
 
 const BrowsePage = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -17,6 +18,7 @@ const BrowsePage = () => {
   const [error, setError] = useState(null)
   const [viewMode, setViewMode] = useState('grid')
   const [showFilters, setShowFilters] = useState(false)
+  const [selectedLand, setSelectedLand] = useState(null)
   
   // Filter state
   const [activeType, setActiveType] = useState(searchParams.get('type') || 'all')
@@ -192,6 +194,14 @@ const BrowsePage = () => {
       { value: 'showcase', label: 'Showcase Projects' }
     ]
     return [allOption, ...typeOptions]
+}
+  
+  const handleLandSelect = (land) => {
+    setSelectedLand(land)
+  }
+  
+  const handleClearLandSelection = () => {
+    setSelectedLand(null)
   }
   
   return (
@@ -247,7 +257,7 @@ const BrowsePage = () => {
           </div>
           
           {/* Properties Grid */}
-          <div className="flex-1">
+<div className="flex-1">
             <PropertyGrid
               properties={filteredProperties}
               loading={loading}
@@ -257,9 +267,17 @@ const BrowsePage = () => {
               onViewModeChange={setViewMode}
               propertyType={activeType}
               showMatchScores={false}
+              onLandSelect={activeType === 'land' || activeType === 'all' ? handleLandSelect : undefined}
             />
           </div>
         </div>
+
+        {/* Floating Land Widget */}
+        <FloatingLandWidget
+          selectedLand={selectedLand}
+          onClose={handleClearLandSelection}
+          onClearSelection={handleClearLandSelection}
+        />
       </div>
     </div>
   )

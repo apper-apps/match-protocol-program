@@ -8,7 +8,6 @@ import MatchesPage from '@/components/pages/MatchesPage'
 import CustomBuildPage from '@/components/pages/CustomBuildPage'
 import ShowcaseProjectsPage from '@/components/pages/ShowcaseProjectsPage'
 import MyAccountPage from '@/components/pages/MyAccountPage'
-
 function App() {
   return (
     <>

@@ -22,13 +22,19 @@ export const getShowcaseProjects = async () => {
 export const getPropertyById = async (id) => {
   await delay(200)
   
+  // Ensure ID is an integer
+  const propertyId = typeof id === 'string' ? parseInt(id, 10) : id
+  if (isNaN(propertyId) || propertyId <= 0) {
+    throw new Error('Invalid property ID')
+  }
+  
   const allProperties = [
     ...landListingsData.map(p => ({ ...p, type: 'land' })),
     ...conceptPlansData.map(p => ({ ...p, type: 'concept' })),
     ...showcaseProjectsData.map(p => ({ ...p, type: 'showcase' }))
   ]
   
-  const property = allProperties.find(p => p.Id === id)
+  const property = allProperties.find(p => p.Id === propertyId)
   
   if (!property) {
     throw new Error('Property not found')
