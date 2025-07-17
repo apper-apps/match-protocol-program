@@ -29,11 +29,25 @@ const HeroSection = () => {
     { value: '30+', label: 'Trusted Builders', icon: 'Users' }
   ]
   
-  return (
+return (
     <section className="relative overflow-hidden">
-      {/* Background */}
+      {/* Video Background */}
+      <div className="absolute inset-0">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+          poster="/api/placeholder/1920/1080"
+        >
+          <source src="/api/placeholder/video/hero-bg.mp4" type="video/mp4" />
+        </video>
+      </div>
+      
+      {/* Background Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-accent opacity-90" />
-      <div className="absolute inset-0 bg-black opacity-20" />
+      <div className="absolute inset-0 bg-black opacity-30" />
       
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
@@ -42,7 +56,6 @@ const HeroSection = () => {
           backgroundSize: '60px 60px'
         }} />
       </div>
-      
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="text-center">
           {/* Hero Content */}
@@ -59,9 +72,9 @@ const HeroSection = () => {
               </span>
             </h1>
             
-            <p className="text-xl text-gray-100 max-w-3xl mx-auto leading-relaxed">
+<p className="text-xl text-gray-100 max-w-3xl mx-auto leading-relaxed">
               Connect premium New Zealand land listings with stunning home concept plans. 
-              Discover your dream property and get matched with trusted local builders.
+              Discover your dream property with AI-powered results and trusted local builders.
             </p>
           </motion.div>
           

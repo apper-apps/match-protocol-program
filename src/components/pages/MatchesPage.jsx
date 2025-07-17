@@ -176,9 +176,9 @@ const MatchesPage = () => {
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">My Matches</h1>
+<h1 className="text-3xl font-bold text-gray-900">My Matches</h1>
           <p className="text-gray-600 mt-2">
-            Create and manage your property matches
+            Create and manage your property matches with AI-powered results
           </p>
         </div>
         

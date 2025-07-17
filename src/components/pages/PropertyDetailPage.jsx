@@ -170,10 +170,13 @@ const PropertyDetailPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Main Image */}
         <div className="relative">
-          <img
+<img
             src={images[selectedImage]}
             alt={property?.title || property?.name}
             className="w-full h-96 object-cover rounded-xl shadow-lg"
+            onError={(e) => {
+              e.target.src = '/api/placeholder/800/600'
+            }}
           />
           
           {images.length > 1 && (
@@ -193,10 +196,13 @@ const PropertyDetailPage = () => {
                 selectedImage === index + 1 ? 'ring-4 ring-primary' : ''
               }`}
             >
-              <img
+<img
                 src={image}
                 alt={`Property image ${index + 2}`}
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                onError={(e) => {
+                  e.target.src = '/api/placeholder/800/600'
+                }}
               />
             </button>
           ))}

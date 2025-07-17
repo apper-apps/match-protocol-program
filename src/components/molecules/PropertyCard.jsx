@@ -1,22 +1,30 @@
-import { motion } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
-import Card from '@/components/atoms/Card'
-import Badge from '@/components/atoms/Badge'
-import Button from '@/components/atoms/Button'
-import ApperIcon from '@/components/ApperIcon'
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import React from "react";
+import ApperIcon from "@/components/ApperIcon";
+import Card from "@/components/atoms/Card";
+import Badge from "@/components/atoms/Badge";
+import Button from "@/components/atoms/Button";
 
-const PropertyCard = ({ property, type = 'land', showMatchScore = false, matchScore = 0 }) => {
+const PropertyCard = ({ property, type = 'land', showMatchScore = false, matchScore = 0, onLandSelect }) => {
   const navigate = useNavigate()
   
-  const handleViewDetails = () => {
-    navigate(`/property/${property.Id}`)
+const handleViewDetails = () => {
+    if (property?.Id) {
+      navigate(`/property/${property.Id}`)
+    }
   }
-  
-  const formatPrice = (price, priceType) => {
-    if (priceType === 'poa') return 'POA'
+const formatPrice = (price, priceType) => {
     if (priceType === 'auction') return 'Auction'
     if (!price) return 'Price on application'
     return `$${price.toLocaleString()}`
+  }
+  
+  const handleLandSelect = (e) => {
+    e.stopPropagation()
+    if (property.type === 'land' && onLandSelect) {
+      onLandSelect(property)
+    }
   }
   
   const getPropertyIcon = () => {
@@ -44,13 +52,15 @@ const PropertyCard = ({ property, type = 'land', showMatchScore = false, matchSc
     >
       <Card hover className="overflow-hidden h-full">
         {/* Image */}
-        <div className="relative h-48 overflow-hidden rounded-t-xl">
+<div className="relative h-48 overflow-hidden rounded-t-xl">
           <img
             src={property.images?.[0] || '/api/placeholder/400/300'}
             alt={property.title || property.name}
             className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+            onError={(e) => {
+              e.target.src = '/api/placeholder/400/300'
+            }}
           />
-          
           {/* Badges */}
           <div className="absolute top-3 left-3 flex gap-2">
             <Badge variant={getPropertyTypeColor()} icon={getPropertyIcon()} size="sm">
@@ -135,7 +145,7 @@ const PropertyCard = ({ property, type = 'land', showMatchScore = false, matchSc
           </div>
           
           {/* Actions */}
-          <div className="flex gap-2">
+<div className="flex gap-2">
             <Button
               variant="primary"
               size="sm"
@@ -145,16 +155,26 @@ const PropertyCard = ({ property, type = 'land', showMatchScore = false, matchSc
               View Details
             </Button>
             
-            <Button
-              variant="ghost"
-              size="sm"
-              icon="Heart"
-              onClick={(e) => {
-                e.stopPropagation()
-                // Handle add to favorites
-              }}
-            />
-          </div>
+            {property.type === 'land' && onLandSelect ? (
+              <Button
+                variant="ghost"
+                size="sm"
+                icon="Plus"
+                onClick={handleLandSelect}
+                title="Select for matching"
+              />
+            ) : (
+              <Button
+                variant="ghost"
+                size="sm"
+                icon="Heart"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  // Handle add to favorites
+                }}
+              />
+            )}
+</div>
         </div>
       </Card>
     </motion.div>

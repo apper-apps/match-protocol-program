@@ -34,7 +34,15 @@ export const getPropertyById = async (id) => {
     throw new Error('Property not found')
   }
   
-  return property
+  // Ensure images have fallback placeholders
+  const propertyWithFallbacks = {
+    ...property,
+    images: property.images && property.images.length > 0 
+      ? property.images.map(img => img || '/api/placeholder/800/600')
+      : ['/api/placeholder/800/600']
+  }
+  
+  return propertyWithFallbacks
 }
 
 export const searchProperties = async (criteria) => {

@@ -15,7 +15,8 @@ const PropertyGrid = ({
   viewMode = 'grid',
   onViewModeChange,
   propertyType = 'all',
-  showMatchScores = false
+  showMatchScores = false,
+  onLandSelect
 }) => {
   const [sortBy, setSortBy] = useState('newest')
   const [sortedProperties, setSortedProperties] = useState([])
@@ -151,11 +152,12 @@ const PropertyGrid = ({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
             >
-              <PropertyCard
+<PropertyCard
                 property={property}
                 type={propertyType}
                 showMatchScore={showMatchScores}
                 matchScore={property.matchScore || Math.floor(Math.random() * 40) + 60}
+                onLandSelect={onLandSelect}
               />
             </motion.div>
           ))}
