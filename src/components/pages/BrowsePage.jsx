@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import FloatingLandWidget from "@/components/organisms/FloatingLandWidget";
 import ApperIcon from "@/components/ApperIcon";
 import PropertyGrid from "@/components/organisms/PropertyGrid";
 import FilterSidebar from "@/components/molecules/FilterSection";
 import PropertyTypeSwitch from "@/components/molecules/PropertyTypeSwitch";
 import SearchBar from "@/components/molecules/SearchBar";
 import Button from "@/components/atoms/Button";
-import FloatingLandWidget from "@/components/molecules/FloatingLandWidget";
 import { getConceptPlans, getLandListings, getShowcaseProjects } from "@/services/api/propertyService";
 
-const BrowsePage = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const [properties, setProperties] = useState([])
-  const [filteredProperties, setFilteredProperties] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [viewMode, setViewMode] = useState('grid')
-  const [showFilters, setShowFilters] = useState(false)
-  const [selectedLand, setSelectedLand] = useState(null)
+export default function BrowsePage() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [properties, setProperties] = useState([]);
+  const [filteredProperties, setFilteredProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [viewMode, setViewMode] = useState('grid');
+  const [showFilters, setShowFilters] = useState(false);
+  const [selectedLand, setSelectedLand] = useState(null);
   
   // Filter state
-  const [activeType, setActiveType] = useState(searchParams.get('type') || 'all')
+  const [activeType, setActiveType] = useState(searchParams.get('type') || 'all');
   const [filters, setFilters] = useState({
     search: searchParams.get('search') || '',
     region: searchParams.get('region') || '',
@@ -33,129 +33,129 @@ const BrowsePage = () => {
     bathrooms: '',
     minArea: '',
     garageSpaces: ''
-  })
+  });
   
   useEffect(() => {
-    loadProperties()
-  }, [])
+    loadProperties();
+  }, []);
   
   useEffect(() => {
-    applyFilters()
-  }, [properties, filters, activeType])
+    applyFilters();
+  }, [properties, filters, activeType]);
   
   const loadProperties = async () => {
     try {
-      setLoading(true)
-      setError(null)
+      setLoading(true);
+      setError(null);
       
       const [landListings, conceptPlans, showcaseProjects] = await Promise.all([
         getLandListings(),
         getConceptPlans(),
         getShowcaseProjects()
-      ])
+      ]);
       
       const allProperties = [
         ...landListings.map(p => ({ ...p, type: 'land' })),
         ...conceptPlans.map(p => ({ ...p, type: 'concept' })),
         ...showcaseProjects.map(p => ({ ...p, type: 'showcase' }))
-      ]
+      ];
       
-      setProperties(allProperties)
+      setProperties(allProperties);
     } catch (err) {
-      setError(err.message)
+      setError(err.message);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
   
   const applyFilters = () => {
-    let filtered = [...properties]
+    let filtered = [...properties];
     
     // Filter by type
     if (activeType !== 'all') {
-      filtered = filtered.filter(p => p.type === activeType)
+      filtered = filtered.filter(p => p.type === activeType);
     }
     
     // Search filter
     if (filters.search) {
-      const searchLower = filters.search.toLowerCase()
+      const searchLower = filters.search.toLowerCase();
       filtered = filtered.filter(p => 
         (p.title || p.name || '').toLowerCase().includes(searchLower) ||
         (p.location || '').toLowerCase().includes(searchLower) ||
         (p.region || '').toLowerCase().includes(searchLower) ||
         (p.description || '').toLowerCase().includes(searchLower)
-      )
+      );
     }
     
     // Region filter
     if (filters.region) {
       filtered = filtered.filter(p => 
         p.region && p.region.toLowerCase() === filters.region.toLowerCase()
-      )
+      );
     }
     
     // Location filter
     if (filters.location) {
-      const locationLower = filters.location.toLowerCase()
+      const locationLower = filters.location.toLowerCase();
       filtered = filtered.filter(p => 
         (p.location || '').toLowerCase().includes(locationLower)
-      )
+      );
     }
     
     // Price filter
     if (filters.minPrice) {
       filtered = filtered.filter(p => 
         (p.price || p.estimatedPrice || 0) >= parseInt(filters.minPrice)
-      )
+      );
     }
     
     if (filters.maxPrice) {
       filtered = filtered.filter(p => 
         (p.price || p.estimatedPrice || 0) <= parseInt(filters.maxPrice)
-      )
+      );
     }
     
     // Property features filter
     if (filters.bedrooms) {
       filtered = filtered.filter(p => 
         p.bedrooms >= parseInt(filters.bedrooms)
-      )
+      );
     }
     
     if (filters.bathrooms) {
       filtered = filtered.filter(p => 
         p.bathrooms >= parseInt(filters.bathrooms)
-      )
+      );
     }
     
     if (filters.minArea) {
       filtered = filtered.filter(p => 
         (p.area || p.floorArea || 0) >= parseInt(filters.minArea)
-      )
+      );
     }
     
     if (filters.garageSpaces) {
       filtered = filtered.filter(p => 
         p.garageSpaces >= parseInt(filters.garageSpaces)
-      )
+      );
     }
     
-    setFilteredProperties(filtered)
-  }
+    setFilteredProperties(filtered);
+  };
   
   const handleSearch = (searchTerm) => {
-    setFilters(prev => ({ ...prev, search: searchTerm }))
-    updateSearchParams({ search: searchTerm })
-  }
+    setFilters(prev => ({ ...prev, search: searchTerm }));
+    updateSearchParams({ search: searchTerm });
+  };
   
   const handleTypeChange = (type) => {
-    setActiveType(type)
-    updateSearchParams({ type: type === 'all' ? null : type })
-  }
+    setActiveType(type);
+    updateSearchParams({ type: type === 'all' ? null : type });
+  };
   
   const handleFilterChange = (key, value) => {
-    setFilters(prev => ({ ...prev, [key]: value }))
-  }
+    setFilters(prev => ({ ...prev, [key]: value }));
+  };
   
   const handleResetFilters = () => {
     setFilters({
@@ -169,32 +169,32 @@ const BrowsePage = () => {
       bathrooms: '',
       minArea: '',
       garageSpaces: ''
-    })
-    setActiveType('all')
-    setSearchParams({})
-  }
+    });
+    setActiveType('all');
+    setSearchParams({});
+  };
   
   const updateSearchParams = (params) => {
-    const newParams = new URLSearchParams(searchParams)
+    const newParams = new URLSearchParams(searchParams);
     Object.entries(params).forEach(([key, value]) => {
       if (value) {
-        newParams.set(key, value)
+        newParams.set(key, value);
       } else {
-        newParams.delete(key)
+        newParams.delete(key);
       }
-    })
-    setSearchParams(newParams)
-  }
+    });
+    setSearchParams(newParams);
+  };
   
   const getTypeOptions = () => {
-    const allOption = { value: 'all', label: 'All Properties' }
+    const allOption = { value: 'all', label: 'All Properties' };
     const typeOptions = [
       { value: 'land', label: 'Land Only' },
       { value: 'concept', label: 'Concept Plans' },
       { value: 'showcase', label: 'Showcase Projects' }
-    ]
-    return [allOption, ...typeOptions]
-}
+    ];
+    return [allOption, ...typeOptions];
+  };
   
   const handleLandSelect = (land) => {
     setSelectedLand(land)
@@ -256,8 +256,8 @@ const BrowsePage = () => {
             </div>
           </div>
           
-          {/* Properties Grid */}
-<div className="flex-1">
+/* Properties Grid */
+          <div className="flex-1">
             <PropertyGrid
               properties={filteredProperties}
               loading={loading}
@@ -282,5 +282,3 @@ const BrowsePage = () => {
     </div>
   )
 }
-
-export default BrowsePage
